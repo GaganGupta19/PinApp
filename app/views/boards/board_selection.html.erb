@@ -1,0 +1,7 @@
+<div class = "board_selection_container">
+	<%= form_for(@category, :url => update_boards_user_boards_path(current_user.id, @board), :html => { :method => :post } ) do |f| %>
+			<%= select_tag "board_id", options_for_select(@boards.collect{ |b| [b.name, b.id] }) %>
+    		<%= f.submit %>
+	<% end %>
+</div>
+

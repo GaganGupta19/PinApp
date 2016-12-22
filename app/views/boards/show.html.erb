@@ -1,0 +1,38 @@
+<p>
+  <strong>Name:</strong>
+  <%= @board.name %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @board.user.email %>
+</p>
+<br />
+<%= link_to 'Edit', edit_user_board_path(@board) %> |
+<%= link_to 'Back', user_boards_path %>
+<br>
+<% count = 0 %>
+<% @board.images.each do |image| %>
+  <% if count % 3 == 0 %>
+    <div class="row">
+   <% end %>
+   <% count += 1 %> 
+    <div class="col-sm-6 col-md-4">
+      <div class="thumbnail">
+        <img src= <%= image.src %> />
+        <div class="caption">
+          <% if image.tags.exists? %>
+            <h3>Tags</h3>
+              <% image.tags.each do |p| %>
+                <span class="label label-info"><%= p.tag %></span>
+              <% end %>
+          <% end %>
+          <br /><br />
+        </div>
+      </div>
+    </div>
+  <% if count % 3 == 0  %>
+    </div>
+  <% end %> 
+<% end %> 
+

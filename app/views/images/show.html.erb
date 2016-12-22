@@ -1,0 +1,10 @@
+<p>
+  <strong>Src:</strong><br />
+  <img src=<%= @image.src %> width="150" height="150"/>
+  <% @image.tags.each do |p| %>
+  	<p><%= p.tag %></p>
+  <% end %>
+</p>
+
+<%= link_to 'Edit', edit_image_path(@image) %> |
+<%= link_to 'Back', images_path %>

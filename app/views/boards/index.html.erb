@@ -1,0 +1,34 @@
+<h1 class="page-header">Boards</h1>
+<!--
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @boards.each do |board| %>
+      <tr>
+        <td><%= board.name %></td>
+        <td><%= link_to 'Show', user_board_path(current_user.id, board.id) %></td>
+        <td><%= link_to 'Edit', edit_user_board_path(current_user.id, board) %></td>
+        <td><%= link_to 'Destroy', user_board_path(current_user.id, board), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>-->
+
+<% @boards.each do |board| %>
+  <div class="jumbotron">
+      <div class = "container">
+        <h3 align="center">
+          <%= link_to board.name, user_board_path(current_user.id, board.id) %>
+        </h3>
+      </div>
+  </div>
+<% end %>
+
+
+<%= link_to 'New Board', new_user_board_path %>

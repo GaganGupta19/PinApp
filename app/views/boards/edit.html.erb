@@ -1,0 +1,6 @@
+<h1>Editing Board</h1>
+
+<%= render 'form', board: @board %>
+
+<%= link_to 'Show', user_board_path(current_user.id, @board)%> |
+<%= link_to 'Back', user_boards_path %>
