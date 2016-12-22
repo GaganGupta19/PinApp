@@ -1,11 +1,14 @@
 <p>
+  <%= link_to 'Edit', edit_image_path(@image) %> |
+  <%= link_to 'Back', images_path %>
+</p>
 <div class="col-sm-6 col-md-4">
       <div class="thumbnail">
       	<img src= <%= @image.src %> />
        		<div class="caption">
           		<% if @image.tags.exists? %>
             	<h3>Tags</h3>
-              	<% image.tags.each do |p| %>
+              	<% @image.tags.each do |p| %>
                 <span class="label label-info"><%= p.tag %></span>
               	<% end %>
           		<% end %>
@@ -14,5 +17,3 @@
    		</div>
 </div>
 
-<%= link_to 'Edit', edit_image_path(@image) %> |
-<%= link_to 'Back', images_path %>
