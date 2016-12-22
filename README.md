@@ -1,5 +1,5 @@
 # README
-This is a web app similar to PinInterest.
+This is a web app similar to Pinterest.
 
 * Ruby version : 2.3.3
 * Rails Version : 5.0.1
