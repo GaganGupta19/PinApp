@@ -1,10 +1,18 @@
 <p>
-  <strong>Src:</strong><br />
-  <img src=<%= @image.src %> width="150" height="150"/>
-  <% @image.tags.each do |p| %>
-  	<p><%= p.tag %></p>
-  <% end %>
-</p>
+<div class="col-sm-6 col-md-4">
+      <div class="thumbnail">
+      	<img src= <%= @image.src %> />
+       		<div class="caption">
+          		<% if @image.tags.exists? %>
+            	<h3>Tags</h3>
+              	<% image.tags.each do |p| %>
+                <span class="label label-info"><%= p.tag %></span>
+              	<% end %>
+          		<% end %>
+          
+      		</div>
+   		</div>
+</div>
 
 <%= link_to 'Edit', edit_image_path(@image) %> |
 <%= link_to 'Back', images_path %>
