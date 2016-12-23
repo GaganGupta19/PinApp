@@ -8,10 +8,6 @@
 <br>
 <% count = 0 %>
 <% @images.each do |image| %>
-  <% if count % 3 == 0 %>
-    <div class="row">
-   <% end %>
-   <% count += 1 %> 
     <div class="col-sm-6 col-md-4">
       <div class="thumbnail">
         <img src= <%= image.src %> />
@@ -31,12 +27,9 @@
         </div>
       </div>
     </div>
-  <% if count % 3 == 0  %>
-    </div>
-  <% end %> 
 <% end %>
 
-<!-- Modal for boards -->
+<!-- Modal for boards 
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -53,7 +46,7 @@
       </div>
     </div>
   </div>
-</div>
+</div>-->
 <!-- end -->
 
 <!-- Modal for creating boards -->
