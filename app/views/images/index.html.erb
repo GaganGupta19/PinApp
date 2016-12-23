@@ -1,17 +1,10 @@
-<div class="row">
-  <%= form_tag images_path, :method => 'get' do %>
-    <p>
-      <%= text_field_tag :search, params[:search] %>
-      <%= submit_tag "Search", :name => nil %>
-    </p>
-  <% end %>
-</div>    
-
-<div class="row">
-  <h1 class="page-header">Images <small align = "right"><%= link_to 'New Image', new_image_path %></small></h1>
-</div>
-
-
+<%= form_tag images_path, :method => 'get' do %>
+  <p>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Search", :name => nil %>
+  </p>
+<% end %>
+<h1 class="page-header">Images <h3 align="right"><small><%= link_to 'New Image', new_image_path %></small></h3></h1>
 <br>
 <% count = 0 %>
 <% @images.each do |image| %>

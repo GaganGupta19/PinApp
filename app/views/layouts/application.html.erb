@@ -59,14 +59,17 @@
 
 	</div>-->
   <div class="row">
-    <div class="col-md-2"></div>
-    <div class="col-md-8">
-      <% flash.each do |name, msg| %>
-      <%= content_tag :div, msg, id: "flash_#{name}" %>
-      <% end %>
-      <%= yield %>
+    <div class="container">
+      <div class="col-md-12">
+        <% flash.each do |name,msg| %>
+          <div class="alert alert-<%= name == "notice" ? "success" : "danger" %>" role="alert">
+          <a class="close" data-dismiss="alert">x</a>
+          <%=msg%>
+          </div>
+        <%end%>
+        <%= yield %>
+      </div>
     </div>
-    <div class="col-md-2"></div>
   </div>
 
   </body>

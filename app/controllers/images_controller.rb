@@ -1,24 +1,27 @@
 class ImagesController < ApplicationController
   before_action :set_image, only: [:show, :edit, :update, :destroy]
   before_filter :authenticate_user!, except: [:index, :show]
-  # GET /images
-  # GET /images.json
+
   def index
+    #checking if the search box is returning any value
     if params[:search]
+      #if it does then fetch tags
       tags = Tag.where(tag: params[:search])
       if !tags.empty?
-        @images = Image.where(id: tags.first.image_id)
-        if tags.size > 1
-          tags.each do |tag|
-            @images = @images + Image.where(id: tag.image_id)
-          end
+        #if tags are present then there will be some images related to those tags
+        tags.each do |tag|
+          #storing them in an instance var
+          @images = @images + Image.where(id: tag.image_id)
         end
       else
+        #if searched tag is not present in db
         @images = Image.all  
       end
     else
+      #for empty field
       @images = Image.all    
     end
+
   end
 
   # GET /images/1

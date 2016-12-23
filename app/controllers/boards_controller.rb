@@ -1,14 +1,13 @@
 class BoardsController < ApplicationController
   before_action :set_board, only: [:show, :edit, :update, :destroy]
   before_filter :authenticate_user!
-  # GET /boards
-  # GET /boards.json
 
   $value = 0
   def index
     @boards = Board.where(user_id: current_user)
   end
 
+  #providing all the boards associated with current user
   def board_selection
     @photo_id = params[:image_id]
     $value = @photo_id
@@ -16,14 +15,23 @@ class BoardsController < ApplicationController
     @category = Category.new
   end
 
+  #creating a field in database with the image id and tag id in the database
   def update_boards
     selected_board_id = params[:board_id]
-    cat = Category.create(board_id: selected_board_id, image_id: $value)
-    if cat
-      redirect_to images_path, :flash => { :success => "Success." }
-   else
-      redirect_to images_path, :flash => { :error => "Error closing message." }
-   end
+    #Category is having many to many relationship
+
+    #checking if the board already contains this image or not 
+    if Category.where(board_id: selected_board_id, image_id: $value).exists?
+      redirect_to images_path, :flash => { :error => "This is images is already associated with this board." }
+    else
+      cat = Category.create(board_id: selected_board_id, image_id: $value)
+      if cat
+        redirect_to images_path, :flash => { :success => "Success." }
+      else
+        redirect_to images_path, :flash => { :error => "Error closing message." }
+      end
+    end
+
   end
 
   # GET /boards/1

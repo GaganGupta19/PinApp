@@ -1,16 +1,8 @@
-<p>
-  <strong>Name:</strong>
-  <%= @board.name %>
-</p>
-
-<p>
-  <strong>User:</strong>
-  <%= @board.user.email %>
-</p>
-<br />
 <%= link_to 'Edit', edit_user_board_path(@board) %> |
 <%= link_to 'Back', user_boards_path %>
-<br>
+
+<h1 class="page-header" align="center"><%= @board.name %><h5 align="right"><small>Board is associated with : <%= @board.user.email %></small><h5></h1>
+<br />
 <% count = 0 %>
 <% @board.images.each do |image| %>
   <% if count % 3 == 0 %>
