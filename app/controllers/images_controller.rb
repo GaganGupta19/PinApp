@@ -9,9 +9,12 @@ class ImagesController < ApplicationController
       tags = Tag.where(tag: params[:search])
       if !tags.empty?
         #if tags are present then there will be some images related to those tags
-        tags.each do |tag|
-          #storing them in an instance var
-          @images = @images + Image.where(id: tag.image_id)
+        @images = Image.where(id: tags.first.image_id)
+        if tags.size > 1
+          tags.each do |tag|
+            #storing them in an instance var
+            @images = @images + Image.where(id: tag.image_id)
+          end
         end
       else
         #if searched tag is not present in db

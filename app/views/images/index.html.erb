@@ -6,7 +6,6 @@
 <% end %>
 <h1 class="page-header">Images <h3 align="right"><small><%= link_to 'New Image', new_image_path %></small></h3></h1>
 <br>
-<% count = 0 %>
 <% @images.each do |image| %>
     <div class="col-sm-6 col-md-4">
       <div class="thumbnail">
@@ -21,7 +20,7 @@
           <br /><br />
           <p>
           <% if user_signed_in? %>
-            <%= link_to 'Pin', board_selection_user_boards_path(current_user.id, image_id: image.id), :class => 'btn btn-danger',data: {toggle: "modal", target: "#myModal"} %>
+           <%= link_to 'Pin', board_selection_user_boards_path(current_user.id, image_id: image.id), :class => 'btn btn-danger',data: {toggle: "modal", target: "#myModal"} %>
           <% end %>
           </p>
         </div>
@@ -29,7 +28,7 @@
     </div>
 <% end %>
 
-<!-- Modal for boards 
+<!-- Modal for boards -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -46,7 +45,7 @@
       </div>
     </div>
   </div>
-</div>-->
+</div>
 <!-- end -->
 
 <!-- Modal for creating boards -->
