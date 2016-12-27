@@ -4,12 +4,12 @@ class ImagesController < ApplicationController
 
   def index
     #checking if the search box is returning any value
+    @images = []
     if params[:search]
       #if it does then fetch tags
       tags = Tag.where(tag: params[:search])
       if !tags.empty?
         #if tags are present then there will be some images related to those tags
-        @images = Image.where(id: tags.first.image_id)
         if tags.size > 1
           tags.each do |tag|
             #storing them in an instance var
