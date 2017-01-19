@@ -18,20 +18,22 @@ class BoardsController < ApplicationController
   #creating a field in database with the image id and tag id in the database
   def update_boards
     selected_board_id = params[:board_id]
+    photo_id = params[:image_id]
+    message = ""
     #Category is having many to many relationship
 
     #checking if the board already contains this image or not 
-    if Category.where(board_id: selected_board_id, image_id: $value).exists?
-      redirect_to images_path, :flash => { :error => "This is images is already associated with this board." }
+    if Category.find_by(board_id: selected_board_id, image_id: photo_id).present?
+      message =  "already"
     else
-      cat = Category.create(board_id: selected_board_id, image_id: $value)
-      if cat
-        redirect_to images_path, :flash => { :success => "Success." }
+      cat = Category.new(board_id: selected_board_id, image_id: photo_id)
+      if cat.save
+        message = "success"
       else
-        redirect_to images_path, :flash => { :error => "Error closing message." }
+        message = "failed"
       end
     end
-
+    render :json => {message: message}
   end
 
   # GET /boards/1

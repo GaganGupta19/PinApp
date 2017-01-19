@@ -1,0 +1,20 @@
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Select Board</h4>
+      </div>
+      <% if current_user.present? %>    
+        <div class="modal-body">
+        <% b = current_user.boards %>
+        <% if b.present? %>
+          <%= hidden_field_tag 'image', id: "", class: "image_id" %>
+          <%= select_tag "board_id", options_for_select(b.collect{ |b| [b.name, b.id] }) %>
+          <%= submit_tag 'Select', id: 'submit-btn' %>
+        <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

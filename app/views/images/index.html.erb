@@ -4,7 +4,7 @@
     <%= submit_tag "Search", :name => nil %>
   </p>
 <% end %>
-<h1 class="page-header">Images <!--<h3 align="right"><small><%= link_to 'New Image', new_image_path %></small></h3>--></h1>
+<h1 class="page-header">Images</h1>
 <br>
 <% @images.each do |image| %>
     <div class="col-sm-6 col-md-4">
@@ -20,7 +20,7 @@
           <br /><br />
           <p>
           <% if user_signed_in? %>
-           <%= link_to 'Pin', board_selection_user_boards_path(current_user.id, image_id: image.id), :class => 'btn btn-danger',data: {toggle: "modal", target: "#myModal"} %>
+          <a href="#" class="btn btn-danger pin-btn" id = '<%= image.id %>' data-toggle="modal" data-target="#myModal">Pin</a>
           <% end %>
           </p>
         </div>
@@ -28,23 +28,32 @@
     </div>
 <% end %>
 
-<!-- Modal for boards -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Select Board</h4>
-      </div>
-      <div class="modal-body">
-      </div>
-    </div>
-  </div>
-</div>
-<!-- end -->
+<%= render partial: 'subcategory_modal' %>
+<script>
+  var image_id = ""
+  
+  $('.pin-btn').click(function(e){
+    e.preventDefault();
+    image_id = $('.image_id').attr('id');
+    $('#myModal').show();
+  });
 
-<!-- Modal for creating boards -->
-
-<!-- end -->
-
+  $('#submit-btn').click(function(e){
+    e.preventDefault();
+    values = {}
+    values['board_id'] = $('#board_id option:selected').val();
+    values['image_id'] = image_id
+    console.log(values);
+    $.ajax({
+      type:'POST', 
+      url: '/boards/update_boards', 
+      data: values
+    }).done(function(response){
+      console.log(values);
+      if(response.message == "already")
+        alert("Already available in this board");
+      $('#myModal').modal('hide');  
+    });
+  });
+</script>
 
